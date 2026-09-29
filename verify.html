@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Verify Certificate | R Bukhari Creative Institute</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <aside class="top-bar">
+    <div class="container top-bar-content">
+      <div class="top-left"><span><i class="fa-solid fa-location-dot"></i> Chichawatni, District Sahiwal, Punjab</span></div>
+      <div class="top-right"><a href="https://wa.me/923107735336"><i class="fa-brands fa-whatsapp"></i> 0310 7735336</a></div>
+    </div>
+  </aside>
+
+  <div class="canvas-wrapper">
+    <div class="arvard-canvas page-canvas">
+
+      <header class="arvard-navbar">
+        <a href="index.html" class="brand-pill">
+          <div class="brand-glyph">RB</div>
+          <div class="brand-copy">
+            <span class="brand-main">R Bukhari</span>
+            <span class="brand-sub">Creative Institute</span>
+          </div>
+        </a>
+
+        <nav class="nav-center-pill" id="navMenu">
+          <a href="index.html" class="nav-pill-item">Home</a>
+          <a href="courses.html" class="nav-pill-item">Courses</a>
+          <a href="faculty.html" class="nav-pill-item">Faculty</a>
+          <a href="about.html" class="nav-pill-item">About Us</a>
+          <a href="verify.html" class="nav-pill-item active">Verify Certificate</a>
+        </nav>
+
+        <div class="nav-right-actions">
+          <a href="admissions.html" class="btn-arvard-cta">Apply Now <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+          <button type="button" class="mobile-menu-btn" id="mobileMenuToggle" aria-label="Toggle Navigation"><i class="fa-solid fa-bars"></i></button>
+        </div>
+      </header>
+
+      <div class="page-title-banner">
+        <span class="eyebrow-tag">CREDENTIAL AUTHENTICATION</span>
+        <h1 class="page-main-heading">Verify an official institute certificate.</h1>
+        <p class="page-subheading">Enter any student Roll Number or Certificate ID issued by R Bukhari Creative Institute to verify validity.</p>
+      </div>
+
+      <div class="verify-page-card">
+        <form id="verifyCardForm" class="verify-search-box">
+          <div class="input-block">
+            <label for="vRoll">Roll Number or Certificate ID</label>
+            <input type="text" id="vRoll" placeholder="e.g. RB-2026-089" required>
+          </div>
+          <button type="submit" class="btn-dark-pill">Verify Credential <i class="fa-solid fa-shield-halved"></i></button>
+        </form>
+
+        <div class="verified-result-card" id="verifyResultDisplay">
+          <div class="cert-badge-valid"><i class="fa-solid fa-certificate"></i> Verified Certificate</div>
+          <h3 id="resStudent">Muhammad Ali</h3>
+          <p class="cert-sub" id="resCourse">Diploma in Graphic Designing (3 Months Onsite)</p>
+          <div class="cert-meta-grid">
+            <div>
+              <span class="m-label">Certificate ID:</span>
+              <strong id="resID">RB-2026-089</strong>
+            </div>
+            <div>
+              <span class="m-label">Campus:</span>
+              <strong>Chichawatni, District Sahiwal</strong>
+            </div>
+            <div>
+              <span class="m-label">Status:</span>
+              <strong class="text-green">Official & Authenticated</strong>
+            </div>
+            <div>
+              <span class="m-label">Verified By:</span>
+              <strong>R Bukhari Creative Institute</strong>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="container footer-sub-bar">
+      <div class="sub-bar-flex">
+        <p>© 2026 R Bukhari Creative Institute. All rights reserved.</p>
+        <a href="courses.html" class="link-learn">Browse Available Diplomas →</a>
+      </div>
+    </div>
+  </footer>
+
+  <a href="https://wa.me/923107735336" class="whatsapp-fab" target="_blank" rel="noopener"><i class="fa-brands fa-whatsapp"></i></a>
+  <script src="main.js"></script>
+</body>
+</html>
