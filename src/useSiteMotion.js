@@ -1,8 +1,8 @@
 import { useLayoutEffect } from "react";
 
 // Animate independent content blocks, so a large section never hides its children.
+// Note: .arvard-navbar is intentionally excluded — it should always be visible.
 const targets = [
-  ".arvard-navbar",
   ".hero-headline-col > *",
   ".hero-stat-circles",
   ".arvard-floating-overlay-card",
@@ -68,6 +68,7 @@ export function useSiteMotion(root, route) {
       element.classList.remove("is-visible");
     });
     // A paint boundary makes the opening sequence reliable on cached navigation.
+    // rootMargin: large top value ensures elements already in viewport reveal immediately.
     frame = requestAnimationFrame(() => {
       observer = new IntersectionObserver(
         (entries) => {
@@ -78,7 +79,7 @@ export function useSiteMotion(root, route) {
             observer.unobserve(target);
           });
         },
-        { threshold: 0, rootMargin: "0px 0px -24px 0px" },
+        { threshold: 0, rootMargin: "200px 0px -24px 0px" },
       );
       elements.forEach((element) => observer.observe(element));
     });

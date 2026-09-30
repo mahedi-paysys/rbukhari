@@ -5,15 +5,9 @@ export default defineConfig({
   plugins: [react()],
   server: { proxy: { "/api": "http://127.0.0.1:3001" } },
   build: {
+    outDir: "dist",
     rollupOptions: {
-      input: [
-        "index.html",
-        "about.html",
-        "admissions.html",
-        "courses.html",
-        "faculty.html",
-        "verify.html",
-      ],
+      input: "index.html",
     },
   },
 });
