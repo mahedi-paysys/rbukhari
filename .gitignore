@@ -1,0 +1,11 @@
+node_modules/
+dist/
+test-results/
+playwright-report/
+.npm-cache/
+.preview/
+.data/
+.local-admin.txt
+.env
+.env.*
+!.env.example

@@ -1,0 +1,251 @@
+/* Motion uses translate/scale; hover uses transform so both can play together. */
+.page-transition {
+  animation: page-arrive 0.65s ease both;
+}
+.reveal {
+  transition: none;
+  translate: none;
+}
+.reveal.is-visible {
+  opacity: 1;
+  translate: none;
+}
+.hero-image-wrap > img {
+  animation: hero-arrive 1.65s cubic-bezier(0.16, 1, 0.3, 1) both;
+  transform-origin: center;
+}
+.arvard-navbar {
+  z-index: 110;
+}
+.course-pill-card {
+  animation: card-arrive 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+.course-pill-card.reveal {
+  animation: none;
+}
+.hero-stat-circles .stat-circle {
+  animation: metric-float 5s ease-in-out infinite;
+}
+.hero-stat-circles .circle-2 {
+  animation-delay: -1.4s;
+}
+.hero-stat-circles .circle-3 {
+  animation-delay: -2.8s;
+}
+.pillar-icon {
+  animation: icon-drift 4.5s ease-in-out infinite;
+}
+.pillar-box:nth-child(2n) .pillar-icon {
+  animation-delay: -2s;
+}
+.whatsapp-fab {
+  animation: contact-glow 3s ease-in-out infinite;
+}
+.nav-pill-item,
+.brand-glyph,
+.pillar-box,
+.faculty-box,
+.bento-card,
+.course-pill-card,
+.about-image-card,
+.pill-card-icon,
+.filter-btn,
+.mode-btn {
+  transition:
+    transform 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.45s ease,
+    background 0.3s ease,
+    color 0.3s ease,
+    border-color 0.3s ease;
+}
+a[class*="btn"],
+button[class*="btn"] {
+  transition:
+    transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+    translate 0.35s ease,
+    box-shadow 0.35s ease,
+    background 0.3s ease,
+    color 0.3s ease;
+}
+.faculty-photo-frame img,
+.about-image-card img,
+.bento-visual img {
+  transition:
+    transform 1s cubic-bezier(0.2, 0.7, 0.2, 1),
+    filter 0.8s ease;
+}
+.input-block input,
+.input-block textarea,
+.input-block select,
+.verify-quick-form input {
+  transition:
+    border-color 0.3s ease,
+    box-shadow 0.3s ease,
+    background 0.3s ease;
+}
+.input-block :is(input, textarea, select):focus,
+.verify-quick-form input:focus {
+  border-color: var(--indigo-primary);
+  box-shadow: 0 0 0 4px #4f46e512;
+}
+.modal-overlay.active {
+  animation: page-arrive 0.3s ease both;
+}
+.modal-window {
+  animation: dialog-arrive 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+.modal-curriculum-box li {
+  animation: card-arrive 0.55s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+.modal-curriculum-box li:nth-child(2) {
+  animation-delay: 0.07s;
+}
+.modal-curriculum-box li:nth-child(3) {
+  animation-delay: 0.14s;
+}
+.modal-curriculum-box li:nth-child(4) {
+  animation-delay: 0.21s;
+}
+.form-feedback-card.show,
+.verified-result-card.show {
+  animation: card-arrive 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+@media (hover: hover) and (pointer: fine) {
+  .course-pill-card:hover,
+  .faculty-box:hover,
+  .bento-card:hover,
+  .about-image-card:hover {
+    transform: translateY(-9px);
+    box-shadow: 0 22px 42px #0f172a1a;
+    border-color: #a5b4fc;
+  }
+  .pillar-box:hover {
+    transform: translateY(-7px);
+  }
+  .course-pill-card:hover .pill-card-icon {
+    transform: rotate(-10deg) scale(1.12);
+  }
+  .faculty-box:hover img,
+  .about-image-card:hover img,
+  .bento-card:hover img {
+    transform: scale(1.085);
+    filter: saturate(1.08);
+  }
+  a[class*="btn"]:hover,
+  button[class*="btn"]:hover {
+    transform: translateY(-3px) scale(1.025);
+    translate: none;
+    box-shadow: 0 10px 24px #4f46e51c;
+  }
+  .nav-pill-item:hover {
+    transform: translateY(-3px);
+  }
+  .brand-pill:hover .brand-glyph {
+    transform: rotate(-9deg) scale(1.06);
+  }
+  .footer-nav-col a:hover {
+    display: inline-block;
+    transform: translateX(5px);
+  }
+  a:hover > i.fa-arrow-right,
+  button:hover > i.fa-arrow-right {
+    transform: translateX(6px);
+  }
+  a:hover > i.fa-arrow-up-right-from-square {
+    transform: translate(2px, -2px);
+  }
+}
+a[class*="btn"]:active,
+button:active {
+  transform: scale(0.97);
+}
+@keyframes page-arrive {
+  from {
+    opacity: 0.3;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes hero-arrive {
+  from {
+    opacity: 0.2;
+    transform: scale(1.09);
+    filter: blur(5px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+    filter: blur(0);
+  }
+}
+@keyframes card-arrive {
+  from {
+    opacity: 0;
+    translate: 0 28px;
+  }
+  to {
+    opacity: 1;
+    translate: 0 0;
+  }
+}
+@keyframes dialog-arrive {
+  from {
+    opacity: 0;
+    transform: translateY(35px) scale(0.93);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes metric-float {
+  0%,
+  100% {
+    transform: translateY(0) rotate(-1deg);
+  }
+  50% {
+    transform: translateY(-11px) rotate(1deg);
+  }
+}
+@keyframes icon-drift {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+@keyframes contact-glow {
+  0%,
+  100% {
+    box-shadow:
+      0 6px 22px #25d36635,
+      0 0 0 0 #25d36620;
+  }
+  50% {
+    box-shadow:
+      0 9px 26px #25d36645,
+      0 0 0 9px #25d36600;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+  .reveal {
+    opacity: 1;
+    translate: none;
+    filter: none;
+  }
+}
+@media print {
+  .reveal {
+    opacity: 1;
+    translate: none;
+  }
+}

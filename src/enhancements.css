@@ -1,0 +1,387 @@
+/* Preserve the original design; extend its motion and small-screen behavior. */
+.mobile-apply {
+  display: none;
+}
+.bento-visual > img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.page-transition {
+  animation: page-enter 0.48s ease both;
+  outline: none;
+}
+.reveal {
+  opacity: 0;
+  translate: 0 22px;
+  transition:
+    opacity 0.65s ease var(--reveal-delay, 0ms),
+    translate 0.65s cubic-bezier(0.2, 0.7, 0.2, 1) var(--reveal-delay, 0ms);
+}
+.reveal.is-visible {
+  opacity: 1;
+  translate: 0 0;
+}
+.course-pill-card {
+  animation: page-enter 0.4s ease both;
+}
+.modal-window {
+  animation: modal-enter 0.25s ease both;
+  max-height: calc(100dvh - 40px);
+  overflow-y: auto;
+}
+.modal-overlay.active {
+  animation: page-enter 0.2s ease both;
+}
+.form-feedback-card.show,
+.verified-result-card.show {
+  animation: page-enter 0.4s ease both;
+}
+.form-feedback-card .btn-dark-pill,
+.verified-result-card .btn-dark-pill {
+  margin-top: 16px;
+}
+.form-feedback-card .btn-dark-pill {
+  margin-inline: 4px;
+}
+.pulse-dot {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+.hero-stat-circles .stat-circle {
+  animation: gentle-float 5s ease-in-out infinite;
+}
+.hero-stat-circles .circle-2 {
+  animation-delay: -0.9s;
+}
+.hero-stat-circles .circle-3 {
+  animation-delay: -1.8s;
+}
+.pill-card-icon {
+  flex-shrink: 0;
+  transition: transform 0.3s ease;
+}
+.faculty-photo-frame img,
+.about-image-card img,
+.bento-card img {
+  transition: transform 0.7s ease;
+}
+a i,
+button i {
+  transition: transform 0.25s ease;
+}
+:focus-visible {
+  outline: 3px solid var(--indigo-primary);
+  outline-offset: 5px;
+}
+.skip-link {
+  position: fixed;
+  left: 16px;
+  top: -100px;
+  z-index: 2000;
+  background: white;
+  padding: 12px 20px;
+  border-radius: 12px;
+}
+.skip-link:focus {
+  top: 16px;
+}
+.course-pill-grid {
+  grid-template-columns: repeat(auto-fill, minmax(min(350px, 100%), 1fr));
+}
+.pill-card-body,
+.input-block,
+.admissions-copy,
+.admissions-form-holder,
+.footer-nav-col {
+  min-width: 0;
+}
+.footer-contact,
+.cert-meta-grid,
+.contact-box-callout {
+  overflow-wrap: anywhere;
+}
+.hero-action-row,
+.pill-meta-row,
+.pill-card-actions,
+.sub-bar-flex,
+.top-bar-content {
+  flex-wrap: wrap;
+}
+input,
+select,
+textarea {
+  max-width: 100%;
+}
+.filter-pill-container {
+  max-width: 100%;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+@media (hover: hover) and (pointer: fine) {
+  .faculty-box:hover img,
+  .about-image-card:hover img,
+  .bento-card:hover img {
+    transform: scale(1.045);
+  }
+  .course-pill-card:hover .pill-card-icon {
+    transform: rotate(-6deg) scale(1.05);
+  }
+  .pillar-box:hover,
+  .bento-card:hover {
+    transform: translateY(-5px);
+  }
+  .pillar-box,
+  .bento-card {
+    transition:
+      transform 0.3s ease,
+      box-shadow 0.3s ease;
+  }
+  a[class*="btn"]:hover,
+  button[class*="btn"]:hover {
+    translate: 0 -2px;
+  }
+  a:hover > i.fa-arrow-right,
+  button:hover > i.fa-arrow-right {
+    transform: translateX(4px);
+  }
+}
+@keyframes page-enter {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes modal-enter {
+  from {
+    opacity: 0;
+    transform: translateY(18px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes gentle-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-7px);
+  }
+}
+@keyframes pulse-glow {
+  50% {
+    box-shadow: 0 0 0 5px #818cf822;
+  }
+}
+@media (max-width: 1120px) {
+  .mobile-menu-btn {
+    display: block;
+    min-width: 44px;
+    min-height: 44px;
+  }
+  .nav-center-pill {
+    position: absolute;
+    top: calc(100% + 14px);
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    background: white;
+    padding: 20px;
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-float);
+    display: none;
+    z-index: 100;
+  }
+  .nav-center-pill.show {
+    display: flex;
+    animation: modal-enter 0.22s ease;
+  }
+  .mobile-apply {
+    display: block;
+  }
+  .nav-pill-item {
+    width: 100%;
+    text-align: center;
+    min-height: 44px;
+  }
+  .top-bar-content {
+    gap: 8px;
+    justify-content: center;
+  }
+}
+@media (max-width: 768px) {
+  .canvas-wrapper {
+    padding: 14px 12px 24px;
+  }
+  .arvard-canvas {
+    padding: 20px 20px 36px;
+    border-radius: 24px;
+  }
+  .container {
+    padding-inline: 20px;
+  }
+  .section-space {
+    padding-block: 48px;
+  }
+  .hero-image-wrap {
+    aspect-ratio: auto;
+    min-height: 0;
+    background: var(--bg-subtle);
+  }
+  .hero-image-wrap > img {
+    height: 280px;
+  }
+  .hero-image-shade {
+    height: 280px;
+    bottom: auto;
+  }
+  .arvard-floating-overlay-card {
+    position: relative;
+    bottom: auto;
+    right: auto;
+    margin: -32px 14px 14px;
+    animation: none;
+    flex-wrap: wrap;
+    padding: 20px;
+  }
+  .hero-editorial-title {
+    font-size: clamp(2rem, 6vw, 3rem);
+  }
+  .page-main-heading {
+    font-size: clamp(1.8rem, 6vw, 2.8rem);
+    overflow-wrap: anywhere;
+  }
+  .hero-stat-circles {
+    justify-content: center;
+  }
+  .verify-flex {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 24px;
+  }
+  .verify-quick-form input {
+    min-width: 0;
+    width: 100%;
+  }
+  .about-content-grid,
+  .admissions-page-split {
+    gap: 30px;
+  }
+  .form-pill-container {
+    padding: 24px;
+  }
+  .form-header-switch,
+  .pill-track-switch {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .sub-bar-flex {
+    gap: 16px;
+  }
+  .whatsapp-fab {
+    width: 52px;
+    height: 52px;
+    bottom: max(16px, env(safe-area-inset-bottom));
+    right: 16px;
+  }
+  .site-footer {
+    padding-bottom: 64px;
+  }
+  input,
+  textarea,
+  select {
+    font-size: 16px !important;
+  }
+}
+@media (max-width: 480px) {
+  .arvard-canvas {
+    padding: 16px 14px 28px;
+  }
+  .brand-main {
+    font-size: 1rem;
+  }
+  .brand-sub {
+    font-size: 0.65rem;
+  }
+  .course-pill-card {
+    padding: 20px 16px;
+    gap: 8px;
+  }
+  .pill-card-icon {
+    width: 44px;
+    height: 44px;
+    font-size: 1.3rem;
+    border-radius: 12px;
+  }
+  .pill-card-body {
+    padding-right: 0;
+  }
+  .pill-card-title {
+    font-size: 1.1rem;
+  }
+  .hero-action-row {
+    align-items: stretch;
+    flex-direction: column;
+  }
+  .hero-action-row a {
+    justify-content: center;
+    text-align: center;
+  }
+  .stat-circle {
+    width: 96px;
+    height: 96px;
+    flex-shrink: 0;
+  }
+  .stat-desc {
+    font-size: 0.65rem;
+  }
+  .form-pill-container,
+  .verify-search-box,
+  .verified-result-card,
+  .modal-window {
+    padding: 22px 16px;
+  }
+  .cert-meta-grid {
+    grid-template-columns: 1fr;
+  }
+  .mode-btn {
+    white-space: normal;
+    min-height: 44px;
+  }
+  .contact-box-callout {
+    align-items: flex-start;
+  }
+  .bento-hero-stat,
+  .bento-quote-box {
+    padding: 24px;
+  }
+  .btn-dark-pill,
+  .btn-indigo-pill {
+    white-space: normal;
+    text-align: center;
+  }
+  .modal-badge-row {
+    padding-right: 25px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+  .reveal {
+    opacity: 1;
+    translate: none;
+  }
+}

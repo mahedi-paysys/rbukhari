@@ -1,0 +1,47 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import os from 'node:os';
+import path from 'node:path';
+import { once } from 'node:events';
+import { createApp } from './app.js';
+import { hashPassword } from './auth.js';
+
+test('API authentication, validated persistence, CMS conflicts, and real certificates',async t=>{
+  const directory=fs.mkdtempSync(path.join(os.tmpdir(),'rbukhari-api-'));
+  fs.writeFileSync(path.join(directory,'admin.json'),JSON.stringify({email:'admin@example.test',passwordHash:await hashPassword('Test-password-only-123!')}));
+  let server=createApp({directory,limits:false}).listen(0,'127.0.0.1');await once(server,'listening');
+  t.after(()=>server.close());
+  let base=`http://127.0.0.1:${server.address().port}/api`;
+  let cookie='',csrf='';
+  async function request(route,method='GET',body,headers={}){const response=await fetch(base+route,{method,headers:{'Content-Type':'application/json',Cookie:cookie,'X-CSRF-Token':csrf,...headers},body:body===undefined?undefined:JSON.stringify(body)});return {response,data:await response.json()};}
+  assert.equal((await request('/admin/content')).response.status,401);
+  const invalid=await request('/inquiries','POST',{name:'x'});assert.equal(invalid.response.status,400);
+  const input={type:'contact',name:'Test Student',email:'student@example.test',phone:'03001234567',message:'Please tell me about online classes.',consent:true};
+  assert.equal((await request('/inquiries','POST',input,{Origin:'https://attacker.example'})).response.status,403);
+  const submitted=await request('/inquiries','POST',input);assert.equal(submitted.response.status,201);assert.ok(submitted.data.id);
+  const login=await request('/admin/login','POST',{email:'admin@example.test',password:'Test-password-only-123!'});assert.equal(login.response.status,200);
+  cookie=login.response.headers.get('set-cookie').split(';')[0];csrf=login.data.csrf;
+  assert.match(login.response.headers.get('set-cookie'),/HttpOnly/);
+  assert.equal((await request('/admin/inquiries')).data.length,1);
+  let content=(await request('/admin/content')).data;
+  assert.equal((await request('/admin/content','PUT',content,{'X-CSRF-Token':''})).response.status,403);
+  const invalidContent=structuredClone(content);invalidContent.settings.facebook='javascript:alert(1)';assert.equal((await request('/admin/content','PUT',invalidContent)).response.status,400);
+  content.settings.announcement='API test announcement';content.courses[0].published=false;
+  const saved=await request('/admin/content','PUT',content);assert.equal(saved.response.status,200);
+  assert.equal((await request('/admin/content','PUT',content)).response.status,409);
+  assert.equal((await request('/content')).data.courses.length,8);
+  assert.equal((await request('/inquiries','POST',{...input,type:'admission',course:content.courses[0].name,batch:'Morning'})).response.status,400);
+  assert.equal((await request('/admin/inquiries/'+submitted.data.id,'PATCH',{status:'contacted',notes:'Called student.'})).response.status,200);
+  const certificate={id:'TEST-2026-001',student:'Test Student',course:'Test Program',issued:'2026-09-30',status:'valid',consent:true};
+  assert.equal((await request('/admin/certificates/'+certificate.id,'PUT',certificate)).response.status,200);
+  assert.equal((await request('/certificates/'+certificate.id)).data.student,'Test Student');
+  assert.equal((await request('/certificates/NOT-FOUND')).response.status,404);
+  await request('/admin/certificates/'+certificate.id,'PUT',{...certificate,status:'revoked'});
+  assert.equal((await request('/certificates/'+certificate.id)).data.status,'revoked');
+  await request('/admin/logout','POST',{});assert.equal((await request('/admin/inquiries')).response.status,401);
+  await new Promise(resolve=>server.close(resolve));
+  server=createApp({directory,limits:false}).listen(0,'127.0.0.1');await once(server,'listening');base=`http://127.0.0.1:${server.address().port}/api`;
+  assert.equal((await request('/content')).data.settings.announcement,'API test announcement');
+  const stored=JSON.parse(fs.readFileSync(path.join(directory,'site.json'),'utf8'));assert.equal(stored.inquiries[0].notes,'Called student.');
+});
