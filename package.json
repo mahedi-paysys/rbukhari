@@ -4,14 +4,15 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "concurrently -k -n API,WEB \"npm:dev:api\" \"npm:dev:web\"",
-    "build": "vite build",
-    "preview": "vite preview --host 0.0.0.0",
-    "test": "playwright test",
+    "dev": "vite",
+    "dev:full": "concurrently -k -n API,WEB \"npm:dev:api\" \"npm:dev:web\"",
     "dev:api": "node --watch server/index.js",
-    "dev:web": "vite --host 0.0.0.0",
+    "dev:web": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
     "start": "node server/index.js",
     "admin:create": "node scripts/create-admin.js",
+    "test": "playwright test",
     "test:api": "node --test server/*.test.js"
   },
   "dependencies": {
